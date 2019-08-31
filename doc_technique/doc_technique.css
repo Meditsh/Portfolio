@@ -1,0 +1,93 @@
+#links {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+body {
+  --couleurBase: rgb(20, 21, 38);
+/* Couleur du backgound du body (en dehors de toutes les zones)*/
+  --couleurBackgroundBody: rgb(52, 169, 197);
+  /*Couleur du backgound des zones*/
+  --couleurBackgroundZone: rgb(255, 233, 184);
+
+  color: var(--couleurBase);
+  margin: 0;
+  --largeurNavbar: 250px;
+  background: white;
+  min-width: 300px;
+}
+
+#navbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: var(--couleurBackgroundZone);
+  height: 100%;
+  width: var(--largeurNavbar);
+  border-right: 4px double darkgreen;
+  display: flex;
+  flex-direction: column;
+}
+
+#navbar header {
+  padding: 30px 0;
+  border-bottom: 2px solid var(--couleurBase);
+}
+
+.nav-link {
+  text-align: right;
+  color: white;
+  padding: 20px 30px 20px 0;
+  margin-right: 20px;
+  margin-bottom: 50px;
+  font-size: 22px;
+  border: 2px solid white;
+  background: var(--couleurBackgroundBody);
+  border-radius: 20px;
+  box-shadow: 10px 15px 10px 7px var(--couleurBase);
+  cursor: pointer;
+}
+
+#main-doc {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  padding-left: calc(var(--largeurNavbar) + 50px);
+  padding-right: 50px;
+}
+
+header {
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+section header {
+  text-align: left;
+  padding-left: 50px;
+}
+
+code {
+  background: lightgrey;
+  border: 1px solid var(--couleurBase);
+  border-radius: 5%;
+  box-shadow: 3px 2px 3px 3px hsla(119, 0%, 16%, 1);
+}
+
+@media (max-width: 700px) {
+  #navbar {
+    position: relative;
+    width: 100%;
+  }
+  .nav-link {
+    text-align: center;
+    padding-right: 0;
+  }
+  #main-doc {
+    padding: 20px 5px 0 5px;
+  }
+}

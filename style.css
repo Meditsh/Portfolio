@@ -1,0 +1,444 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+body{
+
+	--taille_cercle: 150px;
+	--taille_ombreBefore: calc(1.1 * var(--taille_cercle));
+	--taille_ombreAfter: calc(1.25 * var(--taille_cercle));
+	--duree_fondu: 4s;
+	--delai_fondu: 2s;
+	--taille_photo: 200px;
+	--couleur_01: rgb(20, 21, 38);
+	--couleur_02: rgb(62, 63, 83);
+	--couleur_03: rgb(120, 121, 141);
+
+	--taille_cube: 40px;
+	--couleur_cube: white;
+	/*ombre autour du cube pour mettre ses arretes en valeurs*/
+	--portee_lumiere_cube: inset 0 0 20px 0 var(--couleur_01), 0 0 20px 0 var(--couleur_01);
+	--duree_ouverture_contact: 1s;
+
+	overflow-x: hidden;
+	background: var(--couleur_01);
+	color: white;
+	font-family: 'Raleway', sans-serif;
+	padding: 35px;
+}
+
+main{
+	display: grid;
+	grid-template-rows: repeat(3, 200px);
+	/*   grid-template-rows: 1fr 1fr 8fr; */
+	grid-template-columns: 275px 3fr 1fr;
+	grid-template-areas: 
+	"presentation titre titre"
+	"presentation . ."
+	"presentation projets projets";
+}
+
+a{
+	/*  Permet de retirer le soulignement du texte  */
+	text-decoration: none;
+	/* permet de ne pas influencer la couleur (en récupérant celle du parent) */
+	color: inherit;
+}
+
+#container_presentation{
+	grid-area: presentation;
+	background: var(--couleur_02);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+	z-index: 50;
+	height: fit-content;
+	padding: 30px 0;
+}
+
+
+#photo_profil{
+	position: relative;
+	overflow: hidden;
+	height: var(--taille_photo);
+	border-radius: 50%;
+	/*   Afin de centrer l element on utilise le fait que le positionnement top/left utilise la taille du parent comme reference tandis que la fonction translate utilise la taille de lenfant */
+	top: 50%;
+	left: 50%;
+	/*   le translate est mis a 50% en Y au lieu de -50% afin de sortir la photo de lecran (car overflow:hidden) pour pouvoir ensuite la faire apparaître par glissement avec une animation translate -50% en Y */
+	transform: translate(-50%, 50%);
+	transform: translate(-50%, -50%);
+	/*Apparition faisant apparaître la photo depuis le bas vers le haut*/
+	/*animation: apparition_photo 1s ease-out 5s forwards;*/
+}
+
+@keyframes apparition_photo{
+	100%{
+		transform: translate(-50%, -50%);    
+	}
+}
+
+#cadre_photo{
+	position: relative;
+	height: var(--taille_photo);
+	width: var(--taille_photo);
+	overflow: hidden;
+	border-radius: 50%;
+}
+#cadre_photo::before{
+	position: absolute;
+	content: "";
+	height: 75%;
+	width: 75%;
+	background: rgb(0,150,139);
+	background: silver;
+	border-radius: 50%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -35%); 
+}
+
+
+.contact{
+	position: relative;
+	background: var(--couleur_03);
+	width: 105%;
+	/*Permet de ne pas avoir de point devant ma liste (<ul>)*/
+	list-style-type: none;
+	/*Determine l interligne*/
+	/*line-height: 35px;*/
+	color: var(--couleur_03);
+	margin-top: 35px;
+	padding: 15px 5%;
+}
+
+#contact_text{
+	/*Affiche le text "Contacts", les coordonnées sont directement saisi dans l'element cube*/
+	position: absolute;
+	color: var(--couleur_01);
+	color: white;
+	right: 0;
+	top: 0;
+	padding-top: 15px;
+	text-align: center;
+	font-size: 30px;
+  /*Z-index a 10 afin de se mettre au dessus du texte du contact_cube et ne pas enclencher
+  son animation en le survolant*/
+  z-index: 10;
+  height : 100%;
+  /*Width a seulement 80% afin que le contact_cube lui meme soit toujours visible et accessible*/
+  width: 80%;
+}
+
+#description{
+	font-size: 15px;
+	color: inherit;
+}
+
+#container_titre{
+	position: relative;
+	grid-area: titre;
+	display: grid;
+	grid-template-row: 1fr 1fr;
+	justify-items: center;
+	font-size: 60px;
+	margin-top: 40px;
+}
+#container_titre::before{
+	position: absolute;
+	content: "";
+	background: silver;
+	height: 2px;
+	width: 0;
+	z-index: 9999;
+	top: 45%;
+	animation: fondu_barre var(--duree_fondu) linear var(--delai_fondu) forwards;
+}
+@keyframes fondu_barre{
+	100%{
+		width: 25%;
+	}
+}
+
+#nom{
+	position: relative;
+	transform: translate(600px);
+	/*animation: ouverture_nom 5s cubic-bezier(.78,1.95,.43,.73) 1s forwards ;*/
+	animation: ouverture_nom 5s cubic-bezier(.53,.51,.32,1.61) 1s forwards ;
+}
+
+@keyframes ouverture_nom{
+	100%{
+		transform: translate(-75px);
+	}
+}
+
+
+#nom::before{
+	position: absolute;
+	content: "";
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+	background: var(--couleur_01);
+	animation: fondu_nom var(--duree_fondu) linear var(--delai_fondu) forwards;
+}
+
+@keyframes fondu_nom{
+	100%{
+		width: 0;
+	}
+}
+
+#metier{
+	position: relative;
+	font-family: 'Lobster', sans-serif;
+	transform: translate(-550px);
+	/*animation pour une apparition glissée 3 temps: avant-arriere-avant*/
+	/*animation: ouverture_titre 5s cubic-bezier(.78,1.95,.43,.73) 1s forwards ;*/
+	/*animation pour une apparition 2 temps glissée : avant-arriere */
+	animation: ouverture_titre 5s cubic-bezier(.53,.51,.32,1.61) 1s forwards ;
+}
+
+@keyframes ouverture_titre{
+	100%{
+		transform: translate(75px);
+	}
+}
+
+#metier::before{
+	position: absolute;
+	content: "";
+	height: 100%;
+	width: 100%;
+	background: var(--couleur_01);
+	animation: fondu_metier var(--duree_fondu) linear var(--delai_fondu) forwards;
+}
+@keyframes fondu_metier{
+	100%{
+		width: 0;
+	}
+}
+
+.container_projets{
+	position: relative;
+	grid-area: projets;
+	border-top: 5px double silver;
+	margin-left: 20px;
+	width: 100%;
+	padding: 30px;
+}
+
+.titre_projets{
+	position: absolute;
+	margin-left: 50px;
+	font-size: 40px;
+	top: -30px;
+	/*Deplace l element sur la border-top afin qu il serve de titre*/
+	background: var(--couleur_01);
+	/* permet d'etendre le background vers la droite, de sorte a ce que la distance ne varie pas meme si l on modifie le content */
+	box-shadow: 20px 0 0 40px var(--couleur_01);
+}
+
+.flex_projets{
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	height: fit-content;
+	width: fit-content;
+	background: var(--couleur_02);
+	margin: 30px;
+	box-shadow: 5px 5px 0 0 var(--couleur_03);
+}
+
+.img_projet{
+	height: var(--taille_cercle); 
+	width: var(--taille_cercle); 
+	border-radius: 50%;
+}
+
+/*cadre anime d'un effet lorsque le projet est survole*/
+.cadre_projet{
+	position: relative;
+	margin: 45px;
+	height: var(--taille_cercle);
+	width: var(--taille_cercle);
+	background: var(--couleur_03); 
+	border-radius: 50%;
+	display: flex;
+	flex-direction: column;
+}
+.cadre_projet:hover{
+	animation: 2s ease-in-out pulsation infinite;
+	cursor:pointer;
+}
+@keyframes pulsation{
+	50%{
+		transform: scale(1.1);
+	}
+}
+.cadre_projet::before{
+	position: absolute;
+	content: "";
+	right: calc( (var(--taille_ombreBefore) - var(--taille_cercle)) /2 *(-1) );
+	top: calc( (var(--taille_ombreBefore) - var(--taille_cercle)) /2 *(-1) );
+	height: var(--taille_ombreBefore);
+	width: var(--taille_ombreBefore);
+	border-radius: 50%;
+	box-shadow: inset -5px -5px 1px -5px white;
+	z-index: 999;
+}
+.cadre_projet:hover:before{
+	animation: 2s linear rotationOmbre infinite;
+}
+.cadre_projet::after{
+	position: absolute;
+	content: "";
+	right: calc( (var(--taille_ombreAfter) - var(--taille_cercle)) /2 *(-1) );
+	top: calc( (var(--taille_ombreAfter) - var(--taille_cercle)) /2 *(-1) );
+	height: var(--taille_ombreAfter);
+	width: var(--taille_ombreAfter);
+	border-radius: 50%;
+	box-shadow: inset 5px 5px 1px -2px white;
+}
+.cadre_projet:hover:after{
+	animation: 10s linear rotationOmbre infinite;
+}
+@keyframes rotationOmbre{
+	100%{
+		transform: rotate(360deg);
+	}
+}
+
+/*
+************************************
+********* CODE POUR LE CUBE
+************************************
+*/
+
+
+/* contient le texte associé (les contacts) */
+.contact_cube {
+	position: relative;
+	width: fit-content;
+	/*height: calc(1.5* var(--taille_cube));*/
+	padding: 10px;
+	border-radius: 20px;
+	color: var(--couleur_03);
+	perspective: 850px;
+	font-size: calc(var(--taille_cube) / 2.5);
+	transition: 
+	padding var(--duree_ouverture_contact) ease-in-out, 
+	color var(--duree_ouverture_contact) ease-in-out, 
+	background calc(var(--duree_ouverture_contact) /3) linear;
+}
+
+/* ouverture du texte associé (les contacts) */
+.contact_cube:hover{
+	padding: 30px 50px 0 calc(2.2 * var(--taille_cube));
+	color: white;
+	font-weight: bold;
+	color: var(--couleur_01);
+	background: var(--couleur_01);
+	background: white;
+}
+
+
+/* Text du menu avant ouverture */
+.contact_cube::after{
+	content: "";
+	position: relative;
+	top: -10px;
+	font-size: 25px;
+	color: white;
+}
+
+/* l animation ne commence pas si l on survole le texte */
+.contact_cube:hover:after{
+	pointer-events: none;
+	opacity: 0;
+}
+
+.cube {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: var(--taille_cube);
+	width: var(--taille_cube);
+	transform-style: preserve-3d;
+	transform-origin: 50% 50% calc((-1)*(var(--taille_cube)/2));
+	transform: rotateZ(45deg) rotateX(45deg);
+}
+
+/* Lancement de l'animation de rotation */
+.cube:hover{
+	cursor: pointer;
+	animation: spin 8s infinite linear;
+}
+
+@keyframes spin{
+	50%{
+		transform: rotateZ(225deg) rotateX(405deg);
+	}
+	100%{
+		transform: rotateZ(405deg) rotateX(45deg);
+	}
+}
+
+.face{
+	height: var(--taille_cube);
+	width: var(--taille_cube);
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	border: solid 2px var(--couleur_cube);
+	box-shadow: var(--portee_lumiere_cube);
+	overflow: hidden;
+}
+
+/* relets sur les faces du cubes */
+.face::before{
+	position: absolute;
+	content: "";
+	right: var(--taille_cube);
+	height: 50px;
+	width: calc(2 * var(--taille_cube));
+	background: linear-gradient(transparent, white, transparent);
+	transform: rotate(45deg);
+	animation: 2s shine linear infinite;
+}
+
+@keyframes shine{
+	20%{
+		transform: translate(calc(3 * var(--taille_cube))) rotate(45deg);
+	}
+	100%{
+		transform: translate(calc(3 * var(--taille_cube))) rotate(45deg);
+	}
+}
+
+.face_droite {
+	transform-origin: right;
+	transform: rotateY(-90deg);
+}
+
+.face_gauche {
+	transform: rotateY(90deg);
+	transform-origin: left;
+}
+
+.face_arriere {
+	transform: translateZ(calc((-1)*var(--taille_cube)));
+}
+
+.face_haut {
+	transform-origin: top;
+	transform: rotateX(-90deg);
+}
+
+.face_bas {
+	bottom: 0;
+	transform-origin: bottom;
+	transform: rotateX(90deg);
+}

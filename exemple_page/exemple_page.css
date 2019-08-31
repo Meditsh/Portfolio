@@ -1,0 +1,390 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC|Fredericka+the+Great|Special+Elite');
+
+body{
+
+  /*Couleur du texte, des rebords de fenetres, du soleil et du contour des project-tile*/
+  --couleurBase: rgb(20, 146, 175);
+/* Couleur du backgound du body (en dehors de toutes les zones)*/
+  --couleurBackgroundBody: rgb(179, 232, 245);
+  /*Couleur du backgound des zones*/
+  --couleurBackgroundZone: rgb(255, 233, 184);
+  /*Couleur du titre*/
+  --couleurTitle: rgb(255, 83, 61);
+
+  /*Duree du mouvement du soleil*/
+  --dureeAnimation: 15s;
+/* permet de positionner le titre et le soustitre */
+  --position-titre: -40px;
+  --p_tile_hover: 3px;
+/*   permet une animation de couleur sur la welcome-section par rapport au soleil */
+
+  background: var(--couleurBackgroundBody);
+  margin: 0 0 0 65px;
+  font-family: 'Overlock', cursive;
+}
+86, 191, 216
+
+#main{
+  min-width: 500px;
+  margin: 0 5vw;
+}
+
+#navbar{
+  position: fixed;
+  min-width: 120px;
+  padding-left: 10px;
+  margin-top: 200px;
+  left: 5px;
+  display: flex;
+  flex-direction: column;
+  font-size: 25px;
+  list-style: none;
+  color: var(--couleurBase);
+  background: var(--couleurBackgroundZone);
+  box-shadow: 0 0 15px 10px var(--couleurBackgroundBody);
+  border: 1px solid var(--couleurTitle);
+  border-radius: 20px;
+  font-weight: bold;
+  font-family: 'Amatic SC', cursive;
+/*   rien ne passe au dessus de navbar */
+  z-index: 9999;
+/*   pour que le panneau QuiSuisJe sois invisible + ne modifie pas les valeurs souhaitee pour la fenetre */
+  overflow: hidden;
+}
+
+#navbar:hover{
+  overflow: visible;
+}
+
+.nav-button{
+  margin: 0 10px;
+  border-radius: 10px;
+  padding: 5px;
+  transition: 1s transform ease;
+}
+
+.nav-button:hover{
+  box-shadow: 0 0 30px 0 var(--couleurTitle);
+  cursor: pointer;
+}
+
+.volet::before{
+  position: absolute;
+  top: 150px;
+  content: "Ceci est une fenêtre pop up";
+  font-size: 25px;
+  width: 200px;
+  background: var(--couleurBase);
+  color: var(--couleurBackgroundZone);
+  border-radius: 20px;
+  padding: 5px;
+  border: dotted 2px var(--couleurBackgroundZone);
+  box-shadow: 0 0 30px 0 var(--couleurBase);
+  left: -250px;
+  transition: 2s left;
+}
+
+.volet:hover:before{
+  left:50px;
+  opacity: 1;
+}
+
+/* zone sert de base pour #welcome-section et #project */
+.zone{
+/*   la ligne suiv permet au pseudo element de s ajuster a la taille de la div avec des valeur a 100%, sinon il prendrait la taille du browser (etant donne qu il est absolute) */
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--couleurBackgroundZone);
+  border-radius: 20px;
+  color: var(--couleurBase);
+  box-shadow: 
+    inset 0px 20px 8px -10px var(--couleurBase),
+    inset 0px -20px 8px -10px var(--couleurBase);
+  margin-bottom: 10px;
+  padding-bottom: 40px;
+}
+
+.zone::before{
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+/*   photo d une feuille de papier froissee repeter a linfini */
+  background-image: url('https://drive.google.com/uc?id=1Ra_t4lDn1i65upm9m3p70reyaVDSS-t7');
+  background-repeat: repeat;
+  opacity: 0.3;
+}
+
+#welcome-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  margin: 15px 0;
+  overflow: hidden;
+  background: var(--couleurBase);
+  animation: var(--dureeAnimation) linear illumination infinite;
+}
+
+@keyframes illumination{
+  50%{
+    background : var(--couleurBackgroundZone) ;
+  }
+}
+
+h1{
+/*   positionnee en remontant par rapport au centre (grace a #welcome section). J aurais aussi bien pu commencer du top et descendre */
+  position: relative;
+  top: var(--position-titre);
+  font-size: 100px;
+  margin-bottom: 5px;
+  font-family: 'Amatic SC', cursive;
+  font-weight: lighter;
+  font-family: 'Fredericka the Great', cursive;
+  color: var(--couleurTitle);
+}
+
+/* ombre du titre */
+h1::after{
+  font-size: 80px;
+  position: absolute;
+  /*Le pseudo element ne prend pas en compte &eacute pour coder "é", il faut donc utiliser le code UTF-6 : \00E9*/
+  content: "Ombre projet\00E9 e";
+  top: 15px;
+  left: -100px;
+  animation: var(--dureeAnimation) linear sunShadow infinite;
+}
+
+@keyframes sunShadow{
+  0%{
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  25%{
+    transform: translate(40px, 32px) scale(1);
+    opacity: 0.2;
+  }
+  50%{
+    transform: translate(100px, 56px) scale(1.2);
+    opacity: 0.4;
+  }
+  75%{
+    transform: translate(150px, 72px) scale(1);
+    opacity: 0.2;
+  }
+  100%{
+    transform: translate(200px, 80px) scale(0.8);
+    opacity: 0;
+  }
+}
+
+/* la forme du soleil ne peut être obtenu qu avec des pseudo element OU avec position absolute, ici j ai besoin que position : relative pour ne pas deborder de l overflow hidden de welcome-sections */
+#soleil{
+  position: relative;
+  top: -20vh;
+  left: 55vw;
+  border-radius: 50%;
+  animation: var(--dureeAnimation) linear sunrise infinite;
+/*   Je change le scale car simplmt changer les dimensions m auraient demande de recalculer les border et box-shadow */
+  transform: scale(0.7);
+}
+
+#soleil::before{
+  position: absolute;
+  content: "";
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border: solid 5px var(--couleurBackgroundZone);
+  background: var(--couleurBase);
+}
+#soleil::after{
+  position: absolute;
+  content: "";
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border: dotted 5px var(--couleurBase);
+  box-shadow: inset 0 0 25px 22px var(--couleurBackgroundZone), 0 0 30px 10px var(--couleurBase);
+}
+
+@keyframes sunrise{
+  50%{
+    top: -55vh;
+    left: 12.5vw;
+    transform: scale(1.3);
+  }
+  
+  100%{
+    top: -90vh;
+    left: -50vw;
+    transform: scale(0.7);
+  }
+}
+
+#profile-link{
+  position: relative;
+  top: calc(var(--position-titre) + 40px);
+/*   pour que la div et donc la box-shadow ne prenne pas la largeur de l ecran */
+  width: 300px; 
+  text-align: center;
+  font-size: 50px;
+  font-family: 'Fredericka the Great', cursive;
+  font-family: 'Amatic SC', cursive;
+  box-shadow: 0 10px 10px -10px var(--couleurTitle);
+  color: var(--couleurBackgroundZone);
+  border: solid 1px var(--couleurBackgroundZone);
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  animation: var(--dureeAnimation) shine1 linear infinite; 
+}
+
+@keyframes shine1{
+  10%{
+    color: var(--couleurBackgroundZone);
+  }
+  15%{
+    color: var(--couleurBase);
+  }
+  85%{
+    color: var(--couleurBase);
+  }
+  90%{
+    color: var(--couleurBackgroundZone);
+  }
+}
+
+/* mise en valeur du sous titre  */
+#subtitle::before{
+  position: absolute;
+  content: "";
+  height: 50px;
+  width: 200px;
+  left: 50px;
+  top: 30px;
+  border-radius: 50%;
+  background: linear-gradient(transparent, var(--couleurBackgroundZone), transparent);
+  transform: rotate(65deg);
+  transform-origin: 50% -500px;
+  animation: var(--dureeAnimation) 2s shine2 linear infinite;
+}
+
+@keyframes shine2{
+  100%{
+    transform:  rotate(-65deg);
+  }
+}
+
+#projects{
+  display: flex;
+  flex-wrap: wrap;
+  height: fit-content;
+}
+
+h2{
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 35px;
+  font-weight: bold;
+}
+
+a{
+  text-decoration: none;
+  /* permet de ne pas influencer la couleur (en récupérant celle du parent) */
+  color: inherit;
+}
+
+#navbar a{
+  color: var(--couleurBase);
+}
+
+p{
+  color: var(--couleurTitle);
+  margin: 30px 40px 60px 30px;
+}
+
+@media (max-width: 400px){
+  #navbar{
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 250px){
+  #navbar{
+    position: relative;
+    top:0;
+    left:0;
+    margin-top: 15px 5px;
+    width: 100%;;
+  }
+  #body{
+    width: 100%;
+  }
+}
+
+.project-tile{
+  height: 200px;
+  width: 175px;
+  border-radius: 7px;
+  border: solid 3px var(--couleurBase);
+  margin: 10px 10px 10px 40px;
+  display: grid;
+  grid-template-rows: 3fr 1fr;
+/*   au dessus de leffet papier */
+  z-index: 50;
+  perspective: 800px;
+}
+
+/* Emphase du projet prêt à être sélectionné : 
+mouvement losange court et lent */
+.project-tile:hover{
+/*   z-index permet de passer au 1er plan, nécessite que l'élément soit positionné */
+  position: relative;
+  z-index: 9999;
+  border-color: var(--fuschia_clair);
+  transform: scale(1.2);
+  animation: 2s selec linear infinite;
+  box-shadow: 0 0 15px 5px var(--couleurTitle);
+}
+
+@keyframes selec{
+  0%{
+    transform: translate(0, var(--p_tile_hover)) scale(1.2);
+  }
+  25%{
+    transform: translate(var(--p_tile_hover), 0) scale(1.2);
+  }
+  50%{
+    transform: translate(0, calc((-1)*var(--p_tile_hover))) scale(1.2);
+  }
+  75%{
+    transform: translate(calc((-1)*var(--p_tile_hover)), 0) scale(1.2);
+  }
+  100%{
+    transform: translate(0, var(--p_tile_hover)) scale(1.2);
+  }
+}
+
+.project-mini{
+  background: var(--couleurBackgroundBody);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+img{
+  max-width: 100%;
+  max-height: 100%;
+  border: solid 1px var(--couleurBase);
+}
+
+.project-desc{
+  padding-top: 10px;
+  background: var(--couleurBase);
+  color: var(--couleurBackgroundZone);
+  text-align: center;
+}

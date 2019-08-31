@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC|Fredericka+the+Great|Special+Elite');
+
+body{
+
+  --taille_cube: 100px; 
+  --taille_orbe: calc(var(--taille_cube) / 3) ;
+  --couleurBase: rgb(52, 169, 197);
+/*   Couleur des lumières */
+  --couleurLumiere: rgb(20, 21, 38);
+/*   Couleur du fond */
+  --couleurBackground: rgb(255, 233, 184);
+  --portee_lumiere: inset 0 0 10px 0 var(--couleurLumiere), 0 0 10px 0 var(--couleurLumiere);
+  --portee_lumiere2:inset 0 0 10px 10px var(--couleurBase), 0 0 10px 10px rgb(255, 233, 184);
+  --duree_animation: 1s;
+  
+  font-family: 'Press Start 2P';
+  background: var(--couleurBackground);
+/*   overflow: hidden; */
+}
+
+#main{
+/*   height: 600px;
+  width : 960px; */
+/*   background: url('https://drive.google.com/uc?id=1iHJUNKqVWTIchYjhCYUxyLEV1OO-kUM8'); */
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-row-gap: 65px;
+/*   grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 400px; */
+
+}
+
+#description{
+  margin: 15px;
+  width: 80vw;
+  font-family: 'Overlock', cursive;
+  font-size: 20px;
+}
+
+/* contient le texte du menu et le cube */
+.container {
+/*   position: absolute;
+  top: 200px; */
+  position: relative;
+  top: 20px;
+  left: 40px;
+  width: 1px;
+  height: var(--taille_cube);
+  border-radius: 20px;
+  color: var(--couleurBackground);
+  perspective: 850px;
+  font-size: calc(var(--taille_cube) / 3);
+  padding-top: 20px;
+  text-align: center;
+  transition: 
+     width var(--duree_animation) ease-out, 
+    padding var(--duree_animation) ease-in-out, 
+    background calc(var(--duree_animation) /3) linear;
+}
+
+/* ouverture du menu */
+.container:hover{
+  width: 400px;
+  padding-left: 200px;
+  background: var(--couleurBase);
+}
+
+/* projection au sol */
+/* .container::before{
+  position: absolute;
+  left: calc(var(--taille_cube)/2);
+  top: 300px;
+  content: "";
+  height: 80px;
+  width: 80px;
+  background: var(--couleurLumiere);
+  transform: rotateX(-90deg);
+  border-radius: 50%;
+  background: var(--couleurLumiere);
+  box-shadow: 0 0 calc(var(--taille_cube)/2) calc(var(--taille_cube)/2) var(--couleurBase), inset 0 0 20px 20px var(--couleurBase);
+} */
+
+/* Text du menu avant ouverture */
+.container::after{
+  content: "<- plus d'infos ?";
+  position: absolute;
+  left: 50px;
+  top: 75px;
+  width: 600px;
+  font-size: 25px;
+  color: var(--couleurBase);
+  text-shadow: 2px 2px 0 var(--couleurLumiere);
+}
+
+/* l animation ne commence pas si l on survole le texte */
+.container:hover:after{
+  pointer-events: none;
+  text-shadow: none;
+}
+
+.cube {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: var(--taille_cube);
+  width: var(--taille_cube);
+  transform-style: preserve-3d;
+  transform-origin: 50% 50% calc((-1)*(var(--taille_cube)/2));
+  transform: rotateZ(45deg) rotateX(45deg);
+}
+
+.cube:hover{
+  cursor: pointer;
+  animation: spin 8s infinite linear;
+}
+
+@keyframes spin{
+  50%{
+    transform: rotateZ(225deg) rotateX(405deg);
+  }
+  100%{
+   transform: rotateZ(405deg) rotateX(45deg);
+  }
+}
+
+.face{
+  height: var(--taille_cube);
+  width: var(--taille_cube);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: solid 2px var(--couleurBase);
+  box-shadow: var(--portee_lumiere);
+  overflow: hidden;
+  animation: blink 3s linear infinite;
+}
+
+/* clignotement des bordures */
+@keyframes blink{
+  50%{
+  box-shadow: var(--portee_lumiere);
+  }
+  60%{
+  box-shadow: var(--portee_lumiere2);
+  }
+  70%{
+  box-shadow: var(--portee_lumiere);
+  }
+  80%{
+  box-shadow: var(--portee_lumiere2);
+  }
+  90%{
+  box-shadow: var(--portee_lumiere);
+  }
+}
+
+/* relets sur les faces du cubes */
+.face::before{
+  position: absolute;
+  content: "";
+  right: var(--taille_cube);
+  height: 50px;
+  width: calc(2 * var(--taille_cube));
+  background: linear-gradient(transparent, white, transparent);
+  transform: rotate(45deg);
+  animation: 2s shine linear infinite;
+}
+
+@keyframes shine{
+  20%{
+    transform: translate(calc(3 * var(--taille_cube))) rotate(45deg);
+  }
+  100%{
+    transform: translate(calc(3 * var(--taille_cube))) rotate(45deg);
+  }
+}
+
+.face_droite {
+  transform-origin: right;
+  transform: rotateY(-90deg);
+}
+
+.face_gauche {
+  transform: rotateY(90deg);
+  transform-origin: left;
+}
+
+.face_arriere {
+  transform: translateZ(calc((-1)*var(--taille_cube)));
+}
+
+.face_haut {
+  transform-origin: top;
+  transform: rotateX(-90deg);
+}
+
+.face_bas {
+  bottom: 0;
+  transform-origin: bottom;
+  transform: rotateX(90deg);
+}

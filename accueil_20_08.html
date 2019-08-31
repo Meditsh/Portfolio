@@ -1,0 +1,112 @@
+<!--  TODO
+
+Prendre une meilleure photo
+Ajouter les webkit pour Safari
+Alleger le poids des photos a charger
+Faire flotter mon profil à gauche
+Ajouter une page d'accueil
+
+Nettoyer le code :$ (renommer les variables et cellules, utiliser plus de variables, commenter davantage)
+? Faire une maquette du code au cas où je devrais faire une refonte plus tard ?
+
+? Trouver une meilleure Police ?
+? Trouver un meilleur code couleur ?
+ 	essayer rgb(0,150,139); (voi lien https://codepen.io/Meditsh/pen/WNexMaE )
+ -->
+ <!DOCTYPE html>
+ <html>
+
+ <head>
+ 	<link href="style.css" rel="stylesheet" type="text/css">
+ </head>
+
+ <body>
+ 	<main>
+ 		<div id="container_presentation">
+ 			<div id="cadre_photo">
+ 				<!--     photo iniatial sans transparence -->
+ 				<!--  		<img id="photo_profil" src="http://mehdiaoura.zimmer.ovh/images/CV_miniat.jpg"></img> -->
+ 				<img id="photo_profil" src="http://mehdiaoura.zimmer.ovh/images/photos/photo_miniat_transparent_contour.png"></img>
+ 			</div>
+ 			<div class="contact">
+ 				<div id="contact_text">
+ 					&#8592; Contacts
+ 				</div>
+ 				<div class="contact_cube"> 
+ 					mehdi.aoura@gmail.com
+ 					<br>06 05 32 31 15
+ 					<div class="cube">
+ 						<!--       La face avant n a pas besoin d id car utilise les elements par defauts deja definis dans face -->
+ 						<div class="face"></div>
+ 						<div class="face face_droite"></div>
+ 						<div class="face face_gauche"></div>
+ 						<div class="face face_arriere"></div>
+ 						<div class="face face_haut"></div>
+ 						<div class="face face_bas"></div>
+ 					</div>
+ 				</div>
+ 			</div>
+ 			<div class="contact" id="description">
+ 				<b>(site en cours de construction)</b>
+ 				<br>
+ 				<br>Je suis d&eacuteveloppeur Web et travaille en coop&eacuteration avec un designer pour vous proproser des sites efficaces et cr&eacuteatifs.
+ 				<ul>
+ 					<li>Besoin d'un devis pour cr&eacuteer ou mettre &agrave jour votre site ?</li>
+ 					<li>Envie d'&eacutechanger sur le d&eacuteveloppement web ?</li>
+ 					<li>Juste curieux ?</li>
+ 				</ul>
+ 				<br>N'h&eacutesitez pas &agrave me contacter aux coordon&eacutees ci-dessus.
+ 			</div>
+
+ 		</div>
+
+ 		<div id="container_titre">
+ 			<div id="nom">Mehdi AOURA</div>
+ 			<div id="metier">D&eacuteveloppeur Web</div>
+ 		</div>
+
+ 		<div class="container_projets">
+ 			<div class="titre_projets">
+ 				Exercices Design
+ 			</div>
+ 			<div class="flex_projets">
+
+ 				<a href="http://mehdiaoura.zimmer.ovh/menu_dynamique/menu_dynamique.html" target="_blank">
+ 					<div class="cadre_projet">
+ 						<img class="img_projet" src="http://mehdiaoura.zimmer.ovh/images/projets/menu_dynamique.png" alt="miniature">
+ 						<div style="padding: 20px;">Menu dynamique</div>
+ 					</div>
+ 				</a>
+
+ 				<a href="http://mehdiaoura.zimmer.ovh/exemple_page/exemple_page.html" target="_blank">
+ 					<div class="cadre_projet">
+ 						<img class="img_projet" src="http://mehdiaoura.zimmer.ovh/images/projets/exemple_page.png" alt="miniature">
+ 						<div style="padding: 20px;">Page d'accueil</div>
+ 					</div>
+ 				</a>
+
+ 				<a href="http://mehdiaoura.zimmer.ovh/doc_technique/doc_technique.html" target="_blank">
+ 					<div class="cadre_projet">
+ 						<img class="img_projet" src="http://mehdiaoura.zimmer.ovh/images/projets/doc_technique.png" alt="miniature">
+ 						<div style="padding: 20px;">Documentation technique</div>
+ 					</div>
+ 				</a>
+
+ 				<a href="http://mehdiaoura.zimmer.ovh/plaque_metal/plaque_metal.html" target="_blank">
+ 					<div class="cadre_projet">
+ 						<img class="img_projet" src="http://mehdiaoura.zimmer.ovh/images/projets/plaque_metal.png" alt="miniature">
+ 						<div style="padding: 20px;">Plaque m&eacutetal</div>
+ 					</div>
+ 				</a>
+
+ 				<div class="cadre_projet">
+ 					<img class="img_projet" src="http://mehdiaoura.zimmer.ovh/images/Work_in_progress.png" alt="miniature">
+ 					<div style="padding: 20px;">Suite &aacute venir</div>
+ 				</div>
+
+ 			</div>
+ 		</div>
+ 	</main>
+
+ </body>
+ </html>
