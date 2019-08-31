@@ -30,7 +30,7 @@ main{
 	grid-template-rows: repeat(3, 200px);
 	/*   grid-template-rows: 1fr 1fr 8fr; */
 	grid-template-columns: 275px 3fr 1fr;
-	grid-template-areas: 
+	grid-template-areas:
 	"presentation titre titre"
 	"presentation . ."
 	"presentation projets projets";
@@ -73,7 +73,7 @@ a{
 
 @keyframes apparition_photo{
 	100%{
-		transform: translate(-50%, -50%);    
+		transform: translate(-50%, -50%);
 	}
 }
 
@@ -94,7 +94,7 @@ a{
 	border-radius: 50%;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -35%); 
+	transform: translate(-50%, -35%);
 }
 
 
@@ -226,9 +226,11 @@ a{
 	border-top: 5px double silver;
 	margin-left: 20px;
 	width: 100%;
+	height: fit-content;
 	padding: 30px;
 }
 
+/* different de titre_projet avec sans S !!!!!!!!!! */
 .titre_projets{
 	position: absolute;
 	margin-left: 50px;
@@ -240,6 +242,11 @@ a{
 	box-shadow: 20px 0 0 40px var(--couleur_01);
 }
 
+/* different de titre_projets avec un S !!!!!!!!!! */
+.titre_projet{
+	padding: 30px;
+}
+
 .flex_projets{
 	position: relative;
 	display: flex;
@@ -249,11 +256,12 @@ a{
 	background: var(--couleur_02);
 	margin: 30px;
 	box-shadow: 5px 5px 0 0 var(--couleur_03);
+	padding-bottom: 30px;
 }
 
 .img_projet{
-	height: var(--taille_cercle); 
-	width: var(--taille_cercle); 
+	height: var(--taille_cercle);
+	width: var(--taille_cercle);
 	border-radius: 50%;
 }
 
@@ -263,7 +271,7 @@ a{
 	margin: 45px;
 	height: var(--taille_cercle);
 	width: var(--taille_cercle);
-	background: var(--couleur_03); 
+	background: var(--couleur_03);
 	border-radius: 50%;
 	display: flex;
 	flex-direction: column;
@@ -310,6 +318,7 @@ a{
 	}
 }
 
+
 /*
 ************************************
 ********* CODE POUR LE CUBE
@@ -327,9 +336,9 @@ a{
 	color: var(--couleur_03);
 	perspective: 850px;
 	font-size: calc(var(--taille_cube) / 2.5);
-	transition: 
-	padding var(--duree_ouverture_contact) ease-in-out, 
-	color var(--duree_ouverture_contact) ease-in-out, 
+	transition:
+	padding var(--duree_ouverture_contact) ease-in-out,
+	color var(--duree_ouverture_contact) ease-in-out,
 	background calc(var(--duree_ouverture_contact) /3) linear;
 }
 
